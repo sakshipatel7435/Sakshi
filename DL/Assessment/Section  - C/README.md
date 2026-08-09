@@ -1,0 +1,2 @@
+How to Run Locally:
+Clone the repository and navigate to the root directory. Install dependencies using pip install -r requirements.txt. Execute streamlit run app.py in your terminal to start the server. Access the dashboard via your browser at http://localhost:8501.

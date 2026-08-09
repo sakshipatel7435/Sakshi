@@ -1,0 +1,7 @@
+order_id,city,restaurant,delivery_time,revenue
+101,Mumbai,Pizza Palace,25,450.00
+102,Mumbai,Burger Hub,30,300.00
+103,Delhi,Tandoori Express,40,750.00
+104,Mumbai,Pizza Palace,20,500.00
+105,Delhi,Burger Hub,35,280.00
+106,Bangalore,Dosa Plaza,15,150.00
