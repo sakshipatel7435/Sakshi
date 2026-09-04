@@ -8,7 +8,7 @@ st.title("My Music Playlists")
 
 st.sidebar.header("Playlist Settings")
 playlist_name = st.sidebar.text_input("Enter Playlist Name")
-song_count = st.sidebar.number_input("Number of Songs", min_value=1, max_value=100, value=10)
+song_count = st.sidebar.number_input("Number of Songs", min_value=1, max_value=100, value=10)           # value means default value is 10.
 genre = st.sidebar.selectbox("Music Genre", ["Pop", "Rock", "Hip-Hop", "Classical"])
 create_btn = st.sidebar.button("Create Playlist")
 

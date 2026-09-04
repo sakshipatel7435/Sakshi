@@ -1,0 +1,9 @@
+## Task 4: Model Versioning & Tracking
+I have physically created the folder structure (`models/v1/` and `models/v2/`) within this directory as requested. 
+
+To keep track of which version is currently deployed, I would implement a centralized Model Registry (like MLflow or Weights & Biases) or maintain a simple metadata database table. This table maps the environment name (e.g., `production`, `staging`) to the specific model version (e.g., `v2`). Additionally, the production application would load a configuration file (like `config.yaml` or an environment variable) at startup that explicitly points the application to the correct model path (e.g., `MODEL_PATH = "models/v2/model.pkl"`), avoiding any hardcoded paths in the code.
+
+## Task 5: Best Practices for Storing Models (BookMyShow)
+1. **Use a Centralized Model Registry:** Store models in a central registry like MLflow or AWS S3 with strict versioning rather than raw local file systems. This is important because it prevents model drift issues, allows multiple data scientists to collaborate without overriding files, and enables immediate rollbacks if a deployed model starts performing poorly.
+2. **Save Model Metadata and Dependencies:** Alongside the `.pkl` or `.joblib` file, always save the specific `requirements.txt` (scikit-learn version, pandas version) and feature schemas. This ensures that the production server uses the exact same environment the model was trained in, preventing unpickling errors or feature mismatch crashes.
+3. **Use Format Standardisation (e.g., ONNX):** Convert models to standardized formats like ONNX (Open Neural Network Exchange) instead of just relying on Pickle. Pickle can pose severe security risks (arbitrary code execution) if a file is tampered with, and ONNX models can run much faster natively in C++ or Node.js production environments without requiring heavy Python dependencies.

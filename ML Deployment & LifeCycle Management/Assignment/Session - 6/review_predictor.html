@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Review Sentiment Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        textarea { width: 100%; padding: 10px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Enter a Product Review</h2>
+    <textarea id="reviewInput" rows="4" placeholder="Type your Flipkart review here..."></textarea><br>
+    <button onclick="predictReview()">Predict Sentiment</button>
+    <h3 id="result"></h3>
+
+    <script>
+        function predictReview() {
+            const reviewText = document.getElementById('reviewInput').value;
+            
+            // Note: If deploying to PythonAnywhere, change this URL to your PythonAnywhere URL
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({review: reviewText})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = "Prediction: " + data.prediction;
+                document.getElementById('result').style.color = data.prediction === "Positive" ? "green" : "red";
+            })
+            .catch(error => {
+                document.getElementById('result').innerText = "Error connecting to the Prediction API.";
+                document.getElementById('result').style.color = "red";
+            });
+        }
+    </script>
+
+</body>
+</html>
